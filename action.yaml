@@ -5,10 +5,10 @@ branding:
   icon: tag
   color: red
 inputs:
-  segment:
+  type:
     description: "The version segment to increment: major, minor, or patch."
     required: true
-    default: 'minor'
+    default: 'patch'
   publish:
     default: "Publish the package"
     required: false

@@ -1,9 +1,24 @@
 
 
+# Increment and publish NPM
 
+The action will increment the version, save the updated version back to GitHub, createing a tag of the new version, and optionally publish the NPM package to NPM.
+
+### Inputs
+
+The following inputs can be used as `step.with` keys
+
+| Name      | Type       | Req. | Description                                                  |
+| --------- | ---------- | ---- | ------------------------------------------------------------ |
+| type      | String     | Yes  | Should be `major`, `minor`, or `patch`                       |
+| publish   | true/false | No   | Defaults to `true`.  Set to false to update version without publishing |
+| npm_token | String     | Yes  | NPM token that has publish permissions                       |
 
 # Example
-```
+
+This will checkout the code, and pub
+
+```yaml
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -16,7 +31,23 @@
         run: npm ci
 
       - name: "Increment and publish"
-        uses: bitovi/github-actions-npm-publish:main
+        uses: bitovi/github-actions-npm-publish:v1.0.0
+        with:
+          type: patch
+          npm_token: ${{ secrets.NPM_TOKEN }}
             
-
 ```
+
+## Contributing
+We would love for you to contribute to [`bitovi/github-actions-deploy-eks-helm`](https://github.com/bitovi/github-actions-deploy-eks-helm).   [Issues](https://github.com/bitovi/github-actions-deploy-eks-helm/issues) and [Pull Requests](https://github.com/bitovi/github-actions-deploy-eks-helm/pulls) are welcome!
+
+## License
+The scripts and documentation in this project are released under the [MIT License](https://github.com/bitovi/github-actions-deploy-eks-helm/blob/main/LICENSE).
+
+## Provided by Bitovi
+[Bitovi](https://www.bitovi.com/) is a proud supporter of Open Source software.
+
+## Need help?
+Bitovi has consultants that can help.  Drop into [Bitovi's Community Slack](https://www.bitovi.com/community/slack), and talk to us in the `#devops` channel!
+
+Need DevOps Consulting Services?  Head over to [https://www.bitovi.com/devops-consulting](https://hubs.ly/Q01bFvLS0), and book a free consultation.
