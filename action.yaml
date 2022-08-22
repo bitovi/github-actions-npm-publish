@@ -5,7 +5,7 @@ branding:
   icon: tag
   color: red
 inputs:
-  type:
+  update_type:
     description: "The version segment to increment: major, minor, or patch."
     required: true
     default: 'patch'
@@ -24,13 +24,13 @@ runs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          npm version ${{ inputs.segment }} -m "Publish v%s"
+          npm version ${{ github.event.inputs.update_type }} -m "Publish v%s"
           git push --tags
          
       - name: Publish to NPM Registry
-        if: ${{ inputs.publish == 'true' }}
+        if: ${{ github.event.inputs.publish == 'true' }}
         uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ inputs.npm_token }}
+          token: ${{ github.event.inputs.npm_token }}
 
 
