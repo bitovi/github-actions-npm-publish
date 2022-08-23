@@ -20,7 +20,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - id: Tag and push
+      - id: Tag-push
         shell: bash
         run: |
           git config user.name github-actions
