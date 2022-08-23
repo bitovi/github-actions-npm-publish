@@ -14,9 +14,11 @@ The following inputs can be used as `step.with` keys
 | publish   | true/false | No   | Defaults to `true`.  Set to false to update version without publishing |
 | npm_token | String     | Yes  | NPM token that has publish permissions                       |
 
+
 # Example
 
-This will checkout the code, and pub
+This will checkout the code, and publish to NPM
+
 
 ```yaml
       - name: Checkout
@@ -33,8 +35,9 @@ This will checkout the code, and pub
       - name: "Increment and publish"
         uses: bitovi/github-actions-npm-publish:v1.0.0
         with:
-          update_type: patch
+          update_type: 'patch'
           npm_token: ${{ secrets.NPM_TOKEN }}
+          publish: true
             
 ```
 
