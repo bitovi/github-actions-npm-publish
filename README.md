@@ -13,7 +13,8 @@ The following inputs can be used as `step.with` keys
 | update_ type      | String     | Yes  | Should be `major`, `minor`, or `patch`                       |
 | publish   | true/false | No   | Defaults to `true`.  Set to false to update version without publishing |
 | npm_token | String     | Yes  | NPM token that has publish permissions                       |
-
+| git_user_name | String     | No  | Git username for commits                     |
+| git_user_email | String     | No  | Git email for commits                       |
 
 # Example
 
