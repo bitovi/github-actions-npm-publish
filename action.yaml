@@ -31,6 +31,7 @@ runs:
     - id: Tag-push
       shell: bash
       run: |
+        git init
         git config user.name "${{ inputs.git_user_name }}"
         git config user.email "${{ inputs.git_user_email }}"
         npm version ${{ inputs.update_type }} -m "Publish v%s"
