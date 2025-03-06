@@ -5,6 +5,18 @@ branding:
   icon: tag
   color: red
 inputs:
+  checkout:
+    description: Checkout the repository
+    required: false
+    default: 'true'
+  node_version:
+    description: Node version
+    required: false
+    default: '20'
+  node_command:
+    description: Node command to be executed after setting up node.
+    required: false
+    default: 'npm i'
   update_type:
     description: "The version segment to increment: major, minor, or patch."
     required: true
@@ -28,9 +40,19 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout if required
+      if: ${{ inputs.checkout == 'true' }}
+      uses: actions/checkout@v4
+
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node_version }}
+          
     - id: Tag-push
       shell: bash
       run: |
+        ${{ inputs.node_command }}
         git init
         git config user.name "${{ inputs.git_user_name }}"
         git config user.email "${{ inputs.git_user_email }}"
