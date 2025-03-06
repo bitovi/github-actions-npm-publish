@@ -23,8 +23,8 @@ runs:
       - id: Tag-push
         shell: bash
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name os@bitovi.com
+          git config user.email os@bitovi.com
           npm version ${{ github.event.inputs.update_type }} -m "Publish v%s"
           # git push --tags
          
