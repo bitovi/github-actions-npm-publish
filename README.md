@@ -22,18 +22,18 @@ This will checkout the code, and publish to NPM
 
 ```yaml
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: "16"
+          node-version: "20"
 
       - name: "Install"
-        run: npm ci
+        run: npm i
 
       - name: "Increment and publish"
-        uses: bitovi/github-actions-npm-publish:v1.0.0
+        uses: bitovi/github-actions-npm-publish@main
         with:
           update_type: 'patch'
           npm_token: ${{ secrets.NPM_TOKEN }}
