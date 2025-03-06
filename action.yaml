@@ -16,22 +16,28 @@ inputs:
   npm_token:
     description: "npm Secrets token"
     required: true
+  git_user_name:
+    description: "Git username for commits"
+    required: false
+    default: 'Bitovi Automation'
+  git_user_email:
+    description: "Git email for commits"
+    required: false
+    default: 'os@bitovi.com'
 
 runs:
   using: "composite"
   steps:
-      - id: Tag-push
-        shell: bash
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          npm version ${{ github.event.inputs.update_type }} -m "Publish v%s"
-          # git push --tags
-         
-      - name: Publish to NPM Registry
-        if: ${{ github.event.inputs.publish == 'true' }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ github.event.inputs.npm_token }}
+    - id: Tag-push
+      shell: bash
+      run: |
+        git config user.name "${{ inputs.git_user_name }}"
+        git config user.email "${{ inputs.git_user_email }}"
+        npm version ${{ inputs.update_type }} -m "Publish v%s"
+        # git push --tags
 
-
+    - name: Publish to NPM Registry
+      if: ${{ inputs.publish == 'true' }}
+      uses: JS-DevTools/npm-publish@v3
+      with:
+        token: ${{ inputs.npm_token }}
