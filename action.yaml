@@ -40,11 +40,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup npm authentication
-      shell: bash
-      run: |
-        echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_token }}" > ~/.npmrc
-        npm whoami || echo "npm login check failed - continuing anyway"
     - name: Checkout if required
       if: ${{ inputs.checkout == 'true' }}
       uses: actions/checkout@v4
@@ -69,3 +64,4 @@ runs:
       uses: JS-DevTools/npm-publish@v3
       with:
         token: ${{ inputs.npm_token }}
+        access: "public"
