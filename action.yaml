@@ -28,6 +28,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Setup npm authentication
+      shell: bash
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_token }}" > ~/.npmrc
+        npm whoami || echo "npm login check failed - continuing anyway"
     - id: Tag-push
       shell: bash
       run: |
